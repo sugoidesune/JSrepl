@@ -7,7 +7,17 @@
     <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <button onclick="repl.downloadJS()" >DOWNLOAD JS</button>
+        <button onclick="listProjects()" >List all Projects</button>
+        <input id='projectName' type="text" placeholder="Name your Project">
+        <button onclick="storeJS()" >Save</button>
+        <button onclick="editor._actions.runCode.run()" >Run(CTRL+ENTER)</button>
+        <button onclick="deleteProject()" >Delete Project</button>
+        <form enctype="multipart/form-data">
+        <input id="upload" type=file   accept="js" name="files[]" size=30>
+        </form>
+        <button onclick="repl.downloadJS()"> DOWNLOAD JS </button>
+        <editor-storage></editor-storage>
+        
 
             
         
@@ -24,4 +34,29 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="manipulate.js"> </script>
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jshint/2.9.6/jshint.js"></script>-->
+    <script>
+        function handleFileSelect(evt) {
+            var files = evt.target.files; // FileList object
+        
+            // use the 1st file from the list
+            f = files[0];
+        
+            var reader = new FileReader();
+        
+            // Closure to capture the file information.
+            reader.onload = (function(theFile) {
+                return function(e) {
+                file_content= e.target.result
+                editor.setValue(file_content)
+                editorStorage[window.location.href] = file_content;
+                localStorage.setObject("editorStorage", editorStorage);
+                };
+              })(f);
+        
+              // Read in the image file as a data URL.
+              reader.readAsText(f);
+          }
+        
+          document.getElementById('upload').addEventListener('change', handleFileSelect, false);
+        </script>
     </body>
