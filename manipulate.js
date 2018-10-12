@@ -56,8 +56,7 @@ require(['vs/editor/editor.main'], function() {
             // @param editor The editor instance is passed in as a convinience
             run: function(ed) {
                 document.getElementById("myLog").innerHTML = "";
-                editorStorage[window.location.href] = ed.getValue();
-                localStorage.setObject("editorStorage", editorStorage);
+                storeJS();
                 evaluate(ed.getValue());
                 return null;
             }
@@ -67,24 +66,63 @@ require(['vs/editor/editor.main'], function() {
     addRunAction();
 });
 
+function storeJS(){
+    var projectName= document.getElementById('projectName').value || window.location.href;
+    editorStorage[projectName] = editor.getValue();
+    localStorage.setObject("editorStorage", editorStorage);
+    listProjects();
+}
+
+function deleteProject(){
+    var projectName = document.querySelector('#projectName').value;
+    delete editorStorage[projectName];
+    localStorage.setObject("editorStorage", editorStorage);
+    listProjects();
+}
+
+function listProjects(){
+    document.getElementsByTagName("editor-storage")[0].innerHTML = ""
+Object.keys(editorStorage).forEach(function(key){
+    document.getElementsByTagName("editor-storage")[0].innerHTML = document.getElementsByTagName("editor-storage")[0].innerHTML +"<div>" + key  + "</div>" 
+})
+ 
+}
+
+var allProjects = document.querySelector("editor-storage");
+allProjects.addEventListener("click", loadProject, false);
+
+function loadProject(e) {
+    if (e.target !== e.currentTarget) {
+        var tagname = e.target.tagName;
+        var clickedItem = e.target.innerHTML;
+        //onsole.log(clickedItem);
+        document.querySelector('#projectName').value = clickedItem;
+        editor.setValue(editorStorage[clickedItem])
+    }
+    e.stopPropagation();
+}
+
 ////////////////////////////
 // DOWNLOAD JAVASCRIPT AS FILE
 
 var repl = {};
 
 repl.createFile = function(content, name) {
-    var csv = document.createElement('a');
-    csv.setAttribute(
+    var js = document.createElement('a');
+    js.setAttribute(
       'href',
       'data:text/plain;charset=utf-8,' + encodeURIComponent(content)
     );
-    csv.setAttribute('download', name + '.js');
-    document.body.appendChild(csv);
-    csv.click();
+    js.setAttribute('download', name + '.js');
+    document.body.appendChild(js);
+    js.click();
   };
 
 repl.downloadJS = function(){
-    repl.createFile(editor.getValue(), "script");
+    var fileName= document.getElementById('projectName').value || 'script';
+    console.log(document.getElementById.value)
+    console.log(fileName)
+    repl.createFile(editor.getValue(), fileName);
 };
 
 
@@ -138,19 +176,4 @@ function evaluate(code) {
     console.log(e.stack);
     }
 }
-/**
-var targArea = document.getElementById ("containers");
-
-targArea.addEventListener ("keydown", function (zEvent) {
-    if (zEvent.ctrlKey  &&  zEvent.code === "Enter") {
-        zEvent.preventDefault();
-        zEvent.stopPropagation()
-        document.getElementById("myLog").innerHTML = "";
-        localStorage.editor = editor.getValue()
-        evaluate(editor.getValue())
-    }
-    
-});
- */
-
 
