@@ -22,9 +22,9 @@ body {
  p {background: black;}
  #myLog{
      overflow: auto;
+     padding: 20px;
  }
  #myLog div {
-     padding:30px;
      display: inline-block;
      word-wrap: break-word;
      width: 100%;
