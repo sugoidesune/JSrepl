@@ -1,0 +1,60 @@
+{
+  "name": "jsrepl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "manipulate.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\"",
+    "scss": "node-sass --output-style -o app/css dev",
+    "scss:production": "node-sass --output-style compressed -o app/css dev",
+    "bootstrap:scss": "echo love && node-sass --output-style compressed -o app/css node_modules/bootstrap/scss/bootstrap.scss",
+    "bootstrap-darkly-scss": "node-sass --output-style compressed -o app/css node_modules/bootstrap/scss/bootstrap-darkly.scss",
+    "bootstrap-js" : "ROBOCOPY \".\\node_modules\\bootstrap\\dist\\js\" \"app\\js\" bootstrap.bundle.min.js bootstrap.bundle.min.js.map  /mir || exit 0",
+    "autoprefixer": "postcss -u autoprefixer -r app/css/*",
+    "lint": "eslint dev",
+    "uglify": "(IF NOT EXIST app\\js (MKDIR app\\js)) & uglifyjs dev/*.js -m -o app/js/app.js",
+    "imagemin": "imagemin dev/images app/images -p",
+    "serve": "browser-sync start --server --files 'css/*.css, js/*.js, *.html' --startPath /app",
+    "build:css": "npm run scss  && npm run autoprefixer",
+    "build:js": "npm run lint && npm run uglify",
+    "build:all": "npm run lint && npm run uglify",
+    "build:js:production": "npm run lint && npm run uglify",
+    "build:all:production": "npm run build:css && npm run build:js && npm run imagemin",
+    "watch:css": "onchange \"dev/*.scss\" \"node_modules/bootstrap/scss/*.scss\" -- npm run build:css",
+    "watch:bootstrap:css": "onchange \"node_modules/bootstrap/scss/*.scss\" --no-exclude -- npm run bootstrap:scss",
+    "watch:js": "onchange \"dev/*.js\"  -- npm run build:js",
+    "local": "parallelshell \"npm run serve\" \"npm run watch:css\" \"npm run watch:js\" \"npm run watch:bootstrap:css\" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sugoidesune/JSrepl.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sugoidesune/JSrepl/issues"
+  },
+  "homepage": "https://github.com/sugoidesune/JSrepl#readme",
+  "devDependencies": {
+    "autoprefixer": "^9.3.1",
+    "browser-sync": "^2.26.3",
+    "cli-error-notifier": "^2.0.1",
+    "eslint": "^5.8.0",
+    "imagemin-cli": "^3.0.0",
+    "node-sass": "^4.9.4",
+    "onchange": "^5.0.2",
+    "parallelshell": "^3.0.2",
+    "postcss-cli": "^6.0.1",
+    "uglify-js": "^3.4.9"
+  },
+  "browserslist": [
+    "last 1 version",
+    "> 5%",
+    "maintained node versions",
+    "not dead"
+  ],
+  "dependencies": {
+    "bootstrap": "^4.1.3",
+    "monaco-editor": "^0.14.3"
+  }
+}
