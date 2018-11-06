@@ -22,7 +22,7 @@
                         <button class="btn" onclick="editor._actions.runCode.run()" >Run(CTRL+ENTER)</button>
                         <button class="btn btn-danger" onclick="deleteProject()" >Delete Project</button>
                         <form class="m-0" enctype="multipart/form-data">
-                            <input type="file" name="file" id="file" class="inputfile" accept="js" data-multiple-caption="{count} files selected" multiple />
+                            <input type="file" name="file" id="file" class="inputfile" accept=".js" data-multiple-caption="{count} files selected" multiple />
                             <label class="btn btn-info m-0" for="file"><span>Choose a file</span></label>
                         </form>
                         <button class="btn" onclick="repl.downloadJS()"> Download Project </button>
@@ -84,7 +84,7 @@
               reader.readAsText(f);
           }
         
-          document.getElementById('upload').addEventListener('change', handleFileSelect, false);
+          document.getElementById('file').addEventListener('change', handleFileSelect, false);
         </script>
 
                 <script type="text/javascript">
