@@ -152,7 +152,7 @@ function escapeHtml(text) {
 
 
 ////////////////////////LOG//////////////////////////////
-var glitch = true;
+var glitch = false;
 
 window.console = {
     logg: this.console.log,
