@@ -6,8 +6,8 @@
 //var myBinding = editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S, function() {
   //  console.log('SAVE pressed!');
 //});
-var love = 'heyho';
-//alert('lol');
+var love = 'heyhos';
+var testjsrepl = a=>alert("a");
 Storage.prototype.setObject = function(key, value) {
     this.setItem(key, JSON.stringify(value));
 };
@@ -144,7 +144,8 @@ function escapeHtml(text) {
       '"': '&quot;',
       "'": '&#039;'
     };
-    var newtext = text ? text.toString().replace(/[&<>"']/g, function(m) { return map[m];}) : text == 'false' ? 'false' : typeof text ;
+    var newtext = text ? text.toString().replace(/[&<>"']/g, function(m) { return map[m];}) : text === false  ? 'false' : text === 0 ? 0 : text === null  ? 'null' : text === undefined  ? 'undefined' : typeof(text);
+
 
   
     return newtext;
@@ -155,9 +156,9 @@ function escapeHtml(text) {
 var glitch = false;
 
 window.console = {
-    logg: this.console.log,
-    log: function(str){
-        str = escapeHtml(str);
+    logg: window.console.log,
+    log: function(...args){
+        var str = args.map(a=>escapeHtml(a));
       var node = document.createElement("div");
       if (glitch){
         node.classList.add("glitch");
@@ -166,7 +167,8 @@ window.console = {
         if (odds > 93) { node.classList.add("glitchactive");}
       }
       //node.appendChild(document.createTextNode(str));
-      node.innerHTML = str;
+      node.innerHTML = str.join(' ');
+      //this.console.log(str)
       document.getElementById("myLog").appendChild(node);
     },
     error: function(str){
@@ -176,7 +178,7 @@ window.console = {
         node.innerHTML = str;
         document.getElementById("myLog").appendChild(node);
     },
-    warn: this.console.warn,
+    warn: window.console.warn,
   };
 
 
