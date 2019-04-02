@@ -1,0 +1,414 @@
+html, body, div {
+  box-sizing: border-box; }
+
+body {
+  height: 95vh;
+  background: #313131;
+  box-sizing: border-box; }
+  body #projectName {
+    width: 250px; }
+
+#myLog, #vseditor {
+  height: 90vh; }
+
+p {
+  background: black; }
+
+#myLog {
+  color: #ececec;
+  font-family: monospace;
+  overflow: auto;
+  padding: 20px; }
+
+#myLog.crt {
+  box-shadow: inset 0 0 1000px 100px rgba(0, 0, 0, 0.8);
+  background: #404040; }
+
+#myLog div {
+  display: inline-block;
+  word-wrap: break-word;
+  width: 100%;
+  white-space: pre-line; }
+
+row {
+  display: flex;
+  overflow: hidden; }
+
+.wrapper {
+  display: block; }
+
+#sidebar {
+  min-width: 250px;
+  max-width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  right: -250;
+  /* top layer */
+  z-index: 9999;
+  background: #313131; }
+
+#editor-storage {
+  padding: 15px; }
+  #editor-storage div {
+    color: white;
+    display: block; }
+    #editor-storage div:hover {
+      color: black; }
+
+#sidebar.active {
+  right: 0; }
+
+.overlay {
+  display: none;
+  position: fixed;
+  /* full screen */
+  width: 100vw;
+  height: 100vh;
+  /* transparent black */
+  background: rgba(0, 0, 0, 0.7);
+  /* middle layer, i.e. appears below the sidebar */
+  z-index: 998;
+  opacity: 0;
+  /* animate the transition */
+  transition: all 0.5s ease-in-out; }
+
+/* display .overlay when it has the .active class */
+.overlay.active {
+  display: block;
+  opacity: 1; }
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1; }
+
+.inputfile + label {
+  cursor: pointer;
+  /* "hand" cursor */ }
+
+.inputfile:focus + label {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px; }
+
+.glitch {
+  position: relative;
+  width: 400px;
+  margin: 0 auto; }
+
+@keyframes noise-anim {
+  0% {
+    clip: rect(24px, 9999px, 23px, 0); }
+  5% {
+    clip: rect(20px, 9999px, 80px, 0); }
+  10% {
+    clip: rect(70px, 9999px, 75px, 0); }
+  15% {
+    clip: rect(78px, 9999px, 6px, 0); }
+  20% {
+    clip: rect(57px, 9999px, 24px, 0); }
+  25% {
+    clip: rect(61px, 9999px, 13px, 0); }
+  30% {
+    clip: rect(24px, 9999px, 47px, 0); }
+  35% {
+    clip: rect(26px, 9999px, 38px, 0); }
+  40% {
+    clip: rect(90px, 9999px, 37px, 0); }
+  45% {
+    clip: rect(12px, 9999px, 80px, 0); }
+  50% {
+    clip: rect(26px, 9999px, 27px, 0); }
+  55% {
+    clip: rect(95px, 9999px, 52px, 0); }
+  60% {
+    clip: rect(65px, 9999px, 46px, 0); }
+  65% {
+    clip: rect(99px, 9999px, 100px, 0); }
+  70% {
+    clip: rect(84px, 9999px, 34px, 0); }
+  75% {
+    clip: rect(5px, 9999px, 13px, 0); }
+  80% {
+    clip: rect(71px, 9999px, 14px, 0); }
+  85% {
+    clip: rect(25px, 9999px, 10px, 0); }
+  90% {
+    clip: rect(78px, 9999px, 93px, 0); }
+  95% {
+    clip: rect(48px, 9999px, 3px, 0); }
+  100% {
+    clip: rect(35px, 9999px, 74px, 0); } }
+
+.glitch:hover:after {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  text-shadow: -1px 0 red;
+  top: 0;
+  color: white;
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+  animation: noise-anim 2s infinite linear alternate-reverse; }
+
+@keyframes noise-anim-2 {
+  0% {
+    clip: rect(29px, 9999px, 37px, 0); }
+  5% {
+    clip: rect(17px, 9999px, 47px, 0); }
+  10% {
+    clip: rect(92px, 9999px, 39px, 0); }
+  15% {
+    clip: rect(16px, 9999px, 33px, 0); }
+  20% {
+    clip: rect(80px, 9999px, 26px, 0); }
+  25% {
+    clip: rect(22px, 9999px, 8px, 0); }
+  30% {
+    clip: rect(43px, 9999px, 33px, 0); }
+  35% {
+    clip: rect(79px, 9999px, 99px, 0); }
+  40% {
+    clip: rect(91px, 9999px, 33px, 0); }
+  45% {
+    clip: rect(7px, 9999px, 52px, 0); }
+  50% {
+    clip: rect(38px, 9999px, 22px, 0); }
+  55% {
+    clip: rect(74px, 9999px, 11px, 0); }
+  60% {
+    clip: rect(87px, 9999px, 33px, 0); }
+  65% {
+    clip: rect(52px, 9999px, 3px, 0); }
+  70% {
+    clip: rect(62px, 9999px, 58px, 0); }
+  75% {
+    clip: rect(34px, 9999px, 100px, 0); }
+  80% {
+    clip: rect(56px, 9999px, 9px, 0); }
+  85% {
+    clip: rect(76px, 9999px, 92px, 0); }
+  90% {
+    clip: rect(39px, 9999px, 48px, 0); }
+  95% {
+    clip: rect(22px, 9999px, 13px, 0); }
+  100% {
+    clip: rect(40px, 9999px, 70px, 0); } }
+
+.glitch:hover:before {
+  content: attr(data-text);
+  position: absolute;
+  left: -2px;
+  text-shadow: 1px 0 blue;
+  top: 0;
+  color: white;
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+  animation: noise-anim-2 3s infinite linear alternate-reverse; }
+
+.glitchactive:after {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  text-shadow: -1px 0 red;
+  top: 0;
+  color: white;
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+  animation: noise-anim 2s infinite linear alternate-reverse; }
+
+@keyframes noise-anim-2 {
+  0% {
+    clip: rect(26px, 9999px, 97px, 0); }
+  5% {
+    clip: rect(26px, 9999px, 25px, 0); }
+  10% {
+    clip: rect(34px, 9999px, 50px, 0); }
+  15% {
+    clip: rect(27px, 9999px, 55px, 0); }
+  20% {
+    clip: rect(74px, 9999px, 6px, 0); }
+  25% {
+    clip: rect(20px, 9999px, 100px, 0); }
+  30% {
+    clip: rect(67px, 9999px, 3px, 0); }
+  35% {
+    clip: rect(60px, 9999px, 16px, 0); }
+  40% {
+    clip: rect(70px, 9999px, 77px, 0); }
+  45% {
+    clip: rect(6px, 9999px, 55px, 0); }
+  50% {
+    clip: rect(45px, 9999px, 40px, 0); }
+  55% {
+    clip: rect(10px, 9999px, 35px, 0); }
+  60% {
+    clip: rect(7px, 9999px, 4px, 0); }
+  65% {
+    clip: rect(7px, 9999px, 82px, 0); }
+  70% {
+    clip: rect(58px, 9999px, 90px, 0); }
+  75% {
+    clip: rect(54px, 9999px, 88px, 0); }
+  80% {
+    clip: rect(3px, 9999px, 41px, 0); }
+  85% {
+    clip: rect(72px, 9999px, 72px, 0); }
+  90% {
+    clip: rect(73px, 9999px, 29px, 0); }
+  95% {
+    clip: rect(74px, 9999px, 7px, 0); }
+  100% {
+    clip: rect(8px, 9999px, 93px, 0); } }
+
+.glitchactive:before {
+  content: attr(data-text);
+  position: absolute;
+  left: -2px;
+  text-shadow: 1px 0 blue;
+  top: 0;
+  color: white;
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+  animation: noise-anim-2 3s infinite linear alternate-reverse; }
+
+@keyframes flicker {
+  0% {
+    opacity: 0.27861; }
+  5% {
+    opacity: 0.34769; }
+  10% {
+    opacity: 0.23604; }
+  15% {
+    opacity: 0.90626; }
+  20% {
+    opacity: 0.18128; }
+  25% {
+    opacity: 0.83891; }
+  30% {
+    opacity: 0.65583; }
+  35% {
+    opacity: 0.67807; }
+  40% {
+    opacity: 0.26559; }
+  45% {
+    opacity: 0.84693; }
+  50% {
+    opacity: 0.96019; }
+  55% {
+    opacity: 0.08594; }
+  60% {
+    opacity: 0.20313; }
+  65% {
+    opacity: 0.71988; }
+  70% {
+    opacity: 0.53455; }
+  75% {
+    opacity: 0.37288; }
+  80% {
+    opacity: 0.71428; }
+  85% {
+    opacity: 0.70419; }
+  90% {
+    opacity: 0.7003; }
+  95% {
+    opacity: 0.36108; }
+  100% {
+    opacity: 0.24387; } }
+
+@keyframes textShadow {
+  0% {
+    text-shadow: 0.43899px 0 1px rgba(0, 30, 255, 0.5), -0.43899px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px; }
+  5% {
+    text-shadow: 2.7929px 0 1px rgba(0, 30, 255, 0.5), -2.7929px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px; }
+  10% {
+    text-shadow: 0.02956px 0 1px rgba(0, 30, 255, 0.5), -0.02956px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px; }
+  15% {
+    text-shadow: 0.40219px 0 1px rgba(0, 30, 255, 0.5), -0.40219px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px; }
+  20% {
+    text-shadow: 3.4794px 0 1px rgba(0, 30, 255, 0.5), -3.4794px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px; }
+  25% {
+    text-shadow: 1.61256px 0 1px rgba(0, 30, 255, 0.5), -1.61256px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px; }
+  30% {
+    text-shadow: 0.70156px 0 1px rgba(0, 30, 255, 0.5), -0.70156px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px; }
+  35% {
+    text-shadow: 3.89691px 0 1px rgba(0, 30, 255, 0.5), -3.89691px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px; }
+  40% {
+    text-shadow: 3.87091px 0 1px rgba(0, 30, 255, 0.5), -3.87091px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px; }
+  45% {
+    text-shadow: 2.23106px 0 1px rgba(0, 30, 255, 0.5), -2.23106px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px; }
+  50% {
+    text-shadow: 0.08084px 0 1px rgba(0, 30, 255, 0.5), -0.08084px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px; }
+  55% {
+    text-shadow: 2.37585px 0 1px rgba(0, 30, 255, 0.5), -2.37585px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px; }
+  60% {
+    text-shadow: 2.20219px 0 1px rgba(0, 30, 255, 0.5), -2.20219px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px; }
+  65% {
+    text-shadow: 2.86388px 0 1px rgba(0, 30, 255, 0.5), -2.86388px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px; }
+  70% {
+    text-shadow: 0.48874px 0 1px rgba(0, 30, 255, 0.5), -0.48874px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px; }
+  75% {
+    text-shadow: 1.89485px 0 1px rgba(0, 30, 255, 0.5), -1.89485px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px; }
+  80% {
+    text-shadow: 0.0833px 0 1px rgba(0, 30, 255, 0.5), -0.0833px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px; }
+  85% {
+    text-shadow: 0.0977px 0 1px rgba(0, 30, 255, 0.5), -0.0977px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px; }
+  90% {
+    text-shadow: 3.44334px 0 1px rgba(0, 30, 255, 0.5), -3.44334px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px; }
+  95% {
+    text-shadow: 2.18418px 0 1px rgba(0, 30, 255, 0.5), -2.18418px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px; }
+  100% {
+    text-shadow: 2.62088px 0 1px rgba(0, 30, 255, 0.5), -2.62088px 0 1px rgba(255, 0, 80, 0.3), 0 0 3px; } }
+
+.crt::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 15px;
+  bottom: 0;
+  right: 15px;
+  background: rgba(18, 16, 16, 0.1);
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+  animation: flicker 0.15s infinite; }
+
+.crt::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 15px;
+  bottom: 0;
+  right: 15px;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 2;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none; }
+
+.crt {
+  animation: textShadow 1.6s infinite; }
+
+pre {
+  outline: 1px solid #ccc;
+  padding: 5px;
+  margin: 5px; }
+
+.string {
+  color: green; }
+
+.number {
+  color: darkorange; }
+
+.boolean {
+  color: blue; }
+
+.null {
+  color: magenta; }
+
+.key {
+  color: red; }
