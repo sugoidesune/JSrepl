@@ -160,6 +160,7 @@ window.console = {
     log: function(...args){
         var str = args.map(a=>escapeHtml(a));
       var node = document.createElement("div");
+      this.logg(...args);
       if (glitch){
         node.classList.add("glitch");
         node.setAttribute("data-text", str );
@@ -184,7 +185,7 @@ window.console = {
 
 function evaluate(code) {
     try{
-        eval(code); // jshint ignore:line
+        eval.apply(null,[code]); // jshint ignore:line
     }
     catch(e){
     var error = e.stack.split("eval")[0]; // jshint ignore:line
