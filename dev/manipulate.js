@@ -1,3 +1,13 @@
+function evaluate(code) { try{  eval.apply(null,[code]); // jshint ignore:line // in the first line of code to make row line useful in debug message
+  }
+    catch(e){
+    var error = e.stack.split("eval")[0]; // jshint ignore:line
+    var line = e.stack.split(")")[1].substr(1);
+    console.log(error + " " + line );
+    console.log(e.stack);
+    }
+}
+
 /* eslint no-unused-vars: off*/
 /* global monaco:true  */
 /* exported deleteProject */
@@ -181,17 +191,3 @@ window.console = {
     },
     warn: window.console.warn,
   };
-
-
-function evaluate(code) {
-    try{
-        eval.apply(null,[code]); // jshint ignore:line
-    }
-    catch(e){
-    var error = e.stack.split("eval")[0]; // jshint ignore:line
-    var line = e.stack.split(")")[1].substr(1);
-    console.log(error + " " + line );
-    console.log(e.stack);
-    }
-}
-
