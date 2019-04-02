@@ -1,0 +1,94 @@
+<head>
+
+    <style>
+
+    </style>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    </head>
+    <body>
+        <nav id="sidebar">
+            <div id="editor-storage"></div>
+        </nav>
+        <div class="overlay"></div>
+        
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <div class="container-fluid">
+
+                        <button id="listProjects" class="btn btn-primary" >Projects</button>
+                        <button class="btn btn-success" onclick="storeJS()" >Save</button>
+                        <button class="btn" onclick="editor._actions.runCode.run()" >Run(CTRL+ENTER)</button>
+                        <button class="btn btn-danger" onclick="deleteProject()" >Delete Project</button>
+                        <form class="m-0" enctype="multipart/form-data">
+                            <input type="file" name="file" id="file" class="inputfile" accept=".js" data-multiple-caption="{count} files selected" multiple />
+                            <label class="btn btn-info m-0" for="file"><span>Choose a file</span></label>
+                        </form>
+                        <button class="btn" onclick="repl.downloadJS()"> Download Project </button>
+                        <input class="form-control form-control-sm" id='projectName' type="text" placeholder="Name your Project">
+                    </div>
+                </nav>
+
+                
+                
+
+
+                
+            <!-- Dark Overlay element -->
+            
+        
+
+            
+        
+        <row>
+            <div class="col-6">
+                    <div id="vseditor" class=""></div>
+            </div>
+                
+               <!-- <div id="term_demo" class="terminal col-6"></div>-->
+               <div class="col-6">
+                    <p id="myLog" class="mb-0" ></p>
+               </div>
+                
+        </row>
+
+
+
+    <script src="vs/loader.js"></script>
+    <script src="js/bootstrap.bundle.min.js"> </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/app.js"> </script>
+    <script src="js/refactoring.js"> </script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jshint/2.9.6/jshint.js"></script>-->
+    <script>
+        function handleFileSelect(evt) {
+            var files = evt.target.files; // FileList object
+        
+            // use the 1st file from the list
+            f = files[0];
+        
+            var reader = new FileReader();
+        
+            // Closure to capture the file information.
+            reader.onload = (function(theFile) {
+                return function(e) {
+                file_content= e.target.result
+                editor.setValue(file_content)
+                editorStorage[window.location.href] = file_content;
+                localStorage.setObject("editorStorage", editorStorage);
+                };
+              })(f);
+        
+              // Read in the image file as a data URL.
+              reader.readAsText(f);
+          }
+        
+          document.getElementById('file').addEventListener('change', handleFileSelect, false);
+        </script>
+
+                <script type="text/javascript">
+
+                    
+                </script>
+    </body>
